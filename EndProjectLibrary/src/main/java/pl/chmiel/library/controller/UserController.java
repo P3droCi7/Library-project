@@ -28,6 +28,7 @@ public class UserController {
         userRepo.save(user);
         model.addAttribute("users", userRepo.findAll());
         return "showusers";
+
     }
 
 //    @GetMapping("/showallusers")
