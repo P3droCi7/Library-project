@@ -1,4 +1,4 @@
-package pl.chmiel.library.Book;
+package pl.chmiel.library;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +55,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "repository{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +

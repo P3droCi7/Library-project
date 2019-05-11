@@ -1,7 +1,8 @@
-package pl.chmiel.library.User;
+package pl.chmiel.library;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.chmiel.library.component.User;
 
 import java.util.List;
 import java.util.Map;

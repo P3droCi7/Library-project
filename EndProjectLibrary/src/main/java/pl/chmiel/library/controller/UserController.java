@@ -1,4 +1,4 @@
-package pl.chmiel.library.User;
+package pl.chmiel.library;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.chmiel.library.component.User;
+import pl.chmiel.library.repository.UserRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +42,7 @@ public class UserController {
 
     @GetMapping("/showallusers")
     public String listUsers(Model model) {
-      //  User test = new User("michal", "test",1);
-        model.addAttribute("users", userDao.showall(null));
-//        Iterable<User> showUser;
-        userRepo.findAll();
+      model.addAttribute("users", userRepo.findAll());
         return "showusers";
     }
 }
