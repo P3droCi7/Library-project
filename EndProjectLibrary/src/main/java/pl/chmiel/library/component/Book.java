@@ -1,4 +1,4 @@
-package pl.chmiel.library;
+package pl.chmiel.library.component;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

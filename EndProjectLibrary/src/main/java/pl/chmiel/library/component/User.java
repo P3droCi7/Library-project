@@ -1,4 +1,4 @@
-package pl.chmiel.library.User;
+package pl.chmiel.library.component;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,7 +59,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "component{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +

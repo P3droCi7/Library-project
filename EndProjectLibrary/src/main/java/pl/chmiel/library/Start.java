@@ -3,10 +3,10 @@ package pl.chmiel.library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.chmiel.library.Book.Book;
-import pl.chmiel.library.Book.BookRepo;
-import pl.chmiel.library.User.User;
-import pl.chmiel.library.User.UserRepo;
+import pl.chmiel.library.component.Book;
+import pl.chmiel.library.repository.BookRepo;
+import pl.chmiel.library.component.User;
+import pl.chmiel.library.repository.UserRepo;
 
 @RestController
 public class Start {

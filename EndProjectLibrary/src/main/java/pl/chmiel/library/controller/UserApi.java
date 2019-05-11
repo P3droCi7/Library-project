@@ -1,29 +1,25 @@
-package pl.chmiel.library;
+package pl.chmiel.library.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.chmiel.library.component.User;
-
-import java.util.List;
-import java.util.Map;
+import pl.chmiel.library.repository.UserRepo;
 
 @RestController
 public class UserApi {
 
-    private UserDao userDao;
-
     @Autowired
-    public UserApi(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    UserRepo userRepo;
 
     @GetMapping("/user")
-    public List<Map<String, Object>> addUser(@RequestParam long id) {
-        return userDao.getUser(id);
+    public void listUsers(@RequestParam long id, Model model) {
+        model.addAttribute("user", userRepo.findById(id));
     }
 
     @PostMapping("/user")
-    public void addUser(@RequestBody User user) {
-        userDao.save(user);
+    public void addUser(@ModelAttribute User user) {
+        userRepo.save(user);
     }
+
 }
