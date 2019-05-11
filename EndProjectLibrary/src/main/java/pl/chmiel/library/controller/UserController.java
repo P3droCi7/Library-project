@@ -26,6 +26,10 @@ public class UserController {
     @PostMapping("/add")
     public String addUser(@ModelAttribute User user, Model model) {
         userRepo.save(user);
+        return showAllUsers(model);
+    }
+
+    private String showAllUsers(Model model) {
         model.addAttribute("users", userRepo.findAll());
         return "showusers";
     }
