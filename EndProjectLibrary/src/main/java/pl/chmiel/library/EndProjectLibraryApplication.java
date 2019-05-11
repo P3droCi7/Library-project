@@ -10,4 +10,9 @@ public class EndProjectLibraryApplication {
         SpringApplication.run(EndProjectLibraryApplication.class, args);
     }
 
+    //TODO: dodac strone startowa, wybor ksiazek, usowanie uzytkownika, usowanie dodawanie ksiazek
+
+    //TODO: Security, logowanie dla uzytkownika, admin ma dostep do innego endpointu niz user
+    //TODO: przypisanie ile i jakie ksiazki posiada dany user (<=5)
+
 }
