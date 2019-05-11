@@ -13,7 +13,6 @@ import pl.chmiel.library.repository.BookRepo;
 //@RequestMapping("/gui")
 public class BookController {
 
-
     @Autowired
     BookRepo bookRepo;
 
