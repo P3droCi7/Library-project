@@ -6,32 +6,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.chmiel.library.component.User;
-import pl.chmiel.library.repository.UserRepo;
+import pl.chmiel.library.component.Book;
+import pl.chmiel.library.repository.BookRepo;
 
 @Controller
 //@RequestMapping("/gui")
-public class UserController {
+public class BookController {
 
 
     @Autowired
-    UserRepo userRepo;
+    BookRepo bookRepo;
 
-    @GetMapping("/usergui")
+    @GetMapping("/bookgui")
     public String showGui(Model model) {
-        model.addAttribute("user", new User());
-        return "usergui";
+        model.addAttribute("book", new Book());
+        return "bookgui";
     }
 
-    @PostMapping("/adduser")
-    public String addUser(@ModelAttribute User user, Model model) {
-        userRepo.save(user);
-        return showAllUsers(model);
+    @PostMapping("/addbook")
+    public String addBook(@ModelAttribute Book book, Model model) {
+        bookRepo.save(book);
+        return showAllBooks(model);
     }
 
-    private String showAllUsers(Model model) {
-        model.addAttribute("users", userRepo.findAll());
-        return "showusers";
+    private String showAllBooks(Model model) {
+        model.addAttribute("books", bookRepo.findAll());
+        return "showbooks";
     }
 
 //    @GetMapping("/showallusers")

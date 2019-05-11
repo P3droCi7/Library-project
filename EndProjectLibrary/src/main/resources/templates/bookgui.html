@@ -1,0 +1,46 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <h3>Enter book details</h3>
+
+    <form action="#" th:action="@{/addbook}" th:object="${book}" method="post">
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <td>Title: <input type="text" th:field="*{title}"></td>
+            <td>Author: <input type="text" th:field="*{author}"></td>
+            <td>Year: <input type="text" th:field="*{year}"></td>
+
+            </tbody>
+
+            <p><input type="submit" value="Add book!"></p>
+
+        </table>
+
+    </form>
+
+    <!--    <p><input type="submit" value="add user!!!!!!"></p>-->
+</div>
+</body>
+</html>
