@@ -1,71 +1,110 @@
 package pl.chmiel.library.component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
-public class User {
+@Table(name = "users")
+public class User implements Serializable, UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  private static final long serialVersionUID = 1L;
 
-    private String name;
-    private String lastname;
-    private int age;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long userId;
+  private String userName;
+  private String password;
+  private String email;
+  private int enabled;
+  private String role;
 
-    public User(String name, String lastname, int age) {
-        this.name = name;
-        this.lastname = lastname;
-        this.age = age;
-    }
+  public User() {
 
-    public User() {
-    }
+  }
 
-    public long getId() {
-        return id;
-    }
+  public User(User user) {
+    this.userId = user.userId;
+    this.userName = user.userName;
+    this.email = user.email;
+    this.password = user.password;
+    this.enabled = user.enabled;
+  }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+  public int getEnabled() {
+    return enabled;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setEnabled(int enabled) {
+    this.enabled = enabled;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public Long getUserid() {
+    return userId;
+  }
 
-    public String getLastname() {
-        return lastname;
-    }
+  public void setUserid(Long userid) {
+    this.userId = userid;
+  }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return Collections.singleton(new SimpleGrantedAuthority(role));
+  }
 
-    public int getAge() {
-        return age;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+  @Override
+  public String getUsername() {
+    return userName;
+  }
 
-    @Override
-    public String toString() {
-        return "component{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", age='" + age + '\'' +
-                '}';
-    }
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+
 }
-
-
