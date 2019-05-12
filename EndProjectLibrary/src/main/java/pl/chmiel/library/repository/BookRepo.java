@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.chmiel.library.component.Book;
 
 @Repository
-public interface BookRepo extends CrudRepository<Book, Long> {
+public interface BookRepo extends CrudRepository<Book, Integer> {
 }

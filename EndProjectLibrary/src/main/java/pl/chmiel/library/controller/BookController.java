@@ -6,8 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.chmiel.library.component.Book;
 import pl.chmiel.library.repository.BookRepo;
+
+import java.util.Optional;
 
 @Controller
 //@RequestMapping("/gui")
@@ -22,20 +25,30 @@ public class BookController {
         return "bookgui";
     }
 
+    @GetMapping("/showallbooks")
+    private String showAllBooks(Model model) {
+        Iterable<Book> allBooks = bookRepo.findAll();
+        model.addAttribute("books", allBooks);
+        return "showbooks";
+    }
+
     @PostMapping("/addbook")
     public String addBook(@ModelAttribute Book book, Model model) {
         bookRepo.save(book);
         return showAllBooks(model);
     }
 
-    private String showAllBooks(Model model) {
-        model.addAttribute("books", bookRepo.findAll());
-        return "showbooks";
+    @GetMapping("/updatebook")
+    private String updateBook(@RequestParam("bookId") int theId, Model model) {
+        Optional<Book> theBook = bookRepo.findById(theId);
+        model.addAttribute("book", theBook);
+        return "redirect:/bookgui";
     }
 
-//    @GetMapping("/showallusers")
-//    public String listUsers(Model model) {
-//      model.addAttribute("users", userRepo.findAll());
-//        return "showusers";
-//    }
+    @GetMapping("/deletebook")
+    private String deleteBook(@RequestParam("bookId") int theId) {
+        bookRepo.deleteById(theId);
+        return "redirect:/showallbooks";
+    }
+
 }

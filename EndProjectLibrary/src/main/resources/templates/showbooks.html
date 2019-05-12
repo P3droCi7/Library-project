@@ -10,36 +10,48 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!--    <meta charset="UTF-8">-->
-    <!--    <meta name="viewport"-->
-    <!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
-    <!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-    <title>User list</title>
+    <title>Book list</title>
 </head>
 <body>
 <div class="container">
 
     <h3>Book list!</h3>
     <hr>
+
+    <a th:href="@{/bookgui}"
+       class="btn btn-primary btn-sm mb-3">
+        Add Book
+    </a>
+
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
             <th>Title</th>
             <th>Author</th>
             <th>Year</th>
+            <th>Action</th>
         </tr>
         </thead>
 
         <tbody>
 
-<!--        <tr th:if="${users.empty}">-->
-<!--            <td colspan="2"> No Users Available</td>-->
-<!--        </tr>-->
+        <tr th:each="tempBook : ${books}">
+            <td th:text="${tempBook.getTitle()}"/>
+            <td th:text="${tempBook.getAuthor()}"/>
+            <td th:text="${tempBook.getYear()}"/>
 
-        <tr th:each="book : ${books}">
-            <td th:text="${book.getTitle()}"/>
-            <td th:text="${book.getAuthor()}"/>
-            <td th:text="${book.getYear()}"/>
+            <td>
+                <a th:href="@{/updatebook(bookId=${tempBook.id})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+
+                <a th:href="@{/deletebook(bookId=${tempBook.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false ">
+                    Delete
+                </a>
+            </td>
         </tr>
         </tbody>
 
