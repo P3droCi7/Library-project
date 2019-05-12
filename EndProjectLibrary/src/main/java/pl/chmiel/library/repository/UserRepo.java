@@ -6,4 +6,5 @@ import pl.chmiel.library.component.User;
 
 @Repository
 public interface UserRepo extends CrudRepository<User, Long> {
+  User findByUserName(String username);
 }
