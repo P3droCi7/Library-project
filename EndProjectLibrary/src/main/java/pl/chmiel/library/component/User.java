@@ -21,7 +21,7 @@ public class User implements Serializable, UserDetails {
   private String userName;
   private String password;
   private String email;
-  private int enabled;
+  private boolean enabled;
   private String role;
 
   public User() {
@@ -36,11 +36,27 @@ public class User implements Serializable, UserDetails {
     this.enabled = user.enabled;
   }
 
-  public int getEnabled() {
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
+
+  public String getRole() {
+    return role;
+  }
+
+  public void setRole(String role) {
+    this.role = role;
+  }
+
+  public boolean getEnabled() {
     return enabled;
   }
 
-  public void setEnabled(int enabled) {
+  public void setEnabled(boolean enabled) {
     this.enabled = enabled;
   }
 
@@ -50,6 +66,26 @@ public class User implements Serializable, UserDetails {
 
   public void setUserid(Long userid) {
     this.userId = userid;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   @Override
@@ -86,25 +122,15 @@ public class User implements Serializable, UserDetails {
     return true;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  @Override
+  public String toString() {
+    return "User{" +
+            "userId=" + userId +
+            ", userName='" + userName + '\'' +
+            ", password='" + password + '\'' +
+            ", email='" + email + '\'' +
+            ", enabled=" + enabled +
+            ", role='" + role + '\'' +
+            '}';
   }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-
 }
