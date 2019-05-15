@@ -1,6 +1,5 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <html lang="en">
 <head>
 
@@ -9,13 +8,14 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 
-    <title>Welcome</title>
+    <title>Book profile</title>
 </head>
 
 <header>
-    <h1>Library Start page</h1>
+    <h1>Book list</h1>
     <nav>
         <div>
             <ul>
@@ -30,16 +30,47 @@
 </header>
 
 <body>
-
 <div class="container">
-    <h3>Description</h3>
+    <h3>Book profile</h3>
     <hr>
 
-    <p>
-        blah blah blah blah blah blah
-        blah blah blah
-    </p>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="tempBook : ${book}">
+            <td th:text="${tempBook.getTitle()}"/>
+            <td th:text="${tempBook.getAuthor()}"/>
+            <td th:text="${tempBook.getYear()}"/>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+    <!--    <p th:text="${book.getTitle()}"/>-->
+    <!--    <p th:text="${book.getAuthor()}"/>-->
+    <!--    <p th:text="${book.getYear()}"/>-->
+
+    <div class="container">
+        <h3>Description</h3>
+
+        <p>
+            Book description...
+        </p>
+    </div>
+
+    <hr>
+    <a th:href="@{/showallbooks}">Back to Book List</a>
 </div>
+
 
 <footer>
     <div class="container">

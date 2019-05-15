@@ -25,10 +25,15 @@ public class BookController {
         return "bookgui";
     }
 
+    @GetMapping("/bookprofile")
+    private String bookProfile(@RequestParam("bookId") Integer theId) {
+        bookRepo.findById(theId).get();
+        return "bookprofile";
+    }
+
     @GetMapping("/showallbooks")
     private String showAllBooks(Model model) {
-        Iterable<Book> allBooks = bookRepo.findAll();
-        model.addAttribute("books", allBooks);
+        model.addAttribute("books", bookRepo.findAll());
         return "showbooks";
     }
 

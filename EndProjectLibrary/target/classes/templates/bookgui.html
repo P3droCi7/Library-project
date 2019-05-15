@@ -9,8 +9,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
     <title>Add book</title>
 </head>
+
+<header>
+    <h1>Book list</h1>
+    <nav>
+        <div>
+            <ul>
+                <li><a class="menu_button" th:href="@{/startpage}">Home</a></li>
+                <li><a class="menu_button" th:href="@{/showallbooks}">Book list</a></li>
+                <li><a class="menu_button" th:href="@{/adduser}">User Panel</a></li>
+                <li><a class="menu_button" th:href="survey.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+</header>
+
 <body>
 <div class="container">
     <h3>Enter book details</h3>
@@ -26,40 +44,27 @@
         <input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Title">
         <input type="text" th:field="*{author}" class="form-control mb-4 col-4" placeholder="Author">
         <input type="text" th:field="*{year}" class="form-control mb-4 col-4" placeholder="Year">
-        <button type="submit" class="btn btn-info col-2">Add</button>
+        <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
 
     <hr>
     <a th:href="@{/showallbooks}">Back to Book List</a>
 
-    <!--    <form action="#" th:action="@{/addbook}" th:object="${book}" method="post">-->
-
-    <!--        <input type="hidden" th:field="*{id}">-->
-
-    <!--        <table class="table table-bordered table-striped">-->
-    <!--            <thead class="thead-dark">-->
-    <!--            <tr>-->
-    <!--                <th>Title</th>-->
-    <!--                <th>Author</th>-->
-    <!--                <th>Year</th>-->
-    <!--            </tr>-->
-    <!--            </thead>-->
-
-    <!--            <tbody>-->
-
-    <!--            <td>Title: <input type="text" th:field="*{title}"></td>-->
-    <!--            <td>Author: <input type="text" th:field="*{author}"></td>-->
-    <!--            <td>Year: <input type="text" th:field="*{year}"></td>-->
-
-    <!--            </tbody>-->
-
-    <!--            <p><input type="submit" value="Add book!"></p>-->
-
-    <!--        </table>-->
-
-    <!--    </form>-->
-
-    <!--    <p><input type="submit" value="add user!!!!!!"></p>-->
 </div>
+
+<footer>
+    <div class="container">
+        <hr>
+
+        <nav>
+            <ul>
+                <li><a th:href="@{/startpage}">Home</a></li>
+                <li><a th:href="@{/showallbooks}">Book list</a></li>
+                <li><a th:href="@{/adduser}">User Panel</a></li>
+                <li><a th:href="survey.html">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
 </body>
 </html>
