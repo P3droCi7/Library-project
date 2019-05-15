@@ -8,8 +8,8 @@ import java.security.Principal;
 @Controller
 public class StartPage {
 
-    @GetMapping("/startpage")
+    @GetMapping("/index")
     private String index(Principal principal) {
-        return "startpage";
+        return "index";
     }
 }
