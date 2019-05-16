@@ -42,12 +42,21 @@
     <h3>Book list!</h3>
     <hr>
 
-    <a th:href="@{/bookgui}"
-       class="add_button"
-       sec:authorize="hasRole('ROLE_ADMIN')">
-        Add Book
-    </a>
-
+    <div style="display: inline-block;">
+        <a th:href="@{/bookgui}"
+           class="add_button"
+           sec:authorize="hasRole('ROLE_ADMIN')">
+            Add Book
+        </a>
+    </div>
+    <div class="search_bar">
+        <form th:action="@{/findbytitleorauthor}" th:object="${books}" method="get"> Search for book:
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<div class="container">
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -98,7 +107,6 @@
     </table>
 
 </div>
-
 
 <footer>
     <div class="container">

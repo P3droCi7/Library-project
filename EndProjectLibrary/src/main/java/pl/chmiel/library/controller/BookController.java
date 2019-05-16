@@ -37,6 +37,12 @@ public class BookController {
         return "showbooks";
     }
 
+    @GetMapping("/findbytitleorauthor")
+    private String findByTitleOrAuthor(@RequestParam("books") Model model, String str) {
+        model.addAttribute("books", bookRepo.findByTitleOrAuthor(str));
+        return "showbooks";
+    }
+
     @PostMapping("/addbook")
     public String addBook(@ModelAttribute Book book, Model model) {
         bookRepo.save(book);
