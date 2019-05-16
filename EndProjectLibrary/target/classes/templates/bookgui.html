@@ -1,6 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
 <head>
 
     <meta charset="utf-8">
@@ -22,7 +23,8 @@
                 <li><a class="menu_button" th:href="@{/startpage}">Home</a></li>
                 <li><a class="menu_button" th:href="@{/showallbooks}">Book list</a></li>
                 <li><a class="menu_button" th:href="@{/adduser}">User Panel</a></li>
-                <li><a class="menu_button" th:href="survey.html">Login</a></li>
+                <li><a class="menu_button" th:href="@{/login}">Login</a></li>
+
             </ul>
         </div>
     </nav>

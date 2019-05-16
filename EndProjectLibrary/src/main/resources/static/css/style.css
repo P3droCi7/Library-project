@@ -1,3 +1,14 @@
+.login_info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #343a40;
+    font-weight: 700;
+    padding: 10px;
+    background: rgba(220, 220, 220, .7);
+    /*float: left;*/
+}
+
 body {
     margin: 0 auto;
     width: 100%;
@@ -9,7 +20,6 @@ header {
     background-size: 600px;
     height: 165px;
     margin-bottom: 20px;
-
 }
 
 header h1 {
@@ -31,7 +41,7 @@ nav li {
 
 footer {
     margin-top: 20px;
-    position: fixed;
+    /*position: absolute;*/
     left: 0;
     bottom: 20px;
     width: 100%;
@@ -46,6 +56,7 @@ footer nav a:link, footer nav a:visited {
     display: block;
     width: 160px;
     text-align: center;
+    color: #343a40;
     background-color: gainsboro;
 }
 

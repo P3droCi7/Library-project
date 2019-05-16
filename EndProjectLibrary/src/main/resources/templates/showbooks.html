@@ -1,7 +1,8 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"-->
 <head>
 
     <meta charset="utf-8">
@@ -18,13 +19,18 @@
 
 <header>
     <h1>Book list</h1>
+    <p class="login_info"> Logged in as: <span sec:authentication="name"></span>
+        <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+    </p>
     <nav>
         <div>
             <ul>
                 <li><a class="menu_button" th:href="@{/startpage}">Home</a></li>
                 <li><a class="menu_button" th:href="@{/showallbooks}">Book list</a></li>
                 <li><a class="menu_button" th:href="@{/adduser}">User Panel</a></li>
-                <li><a class="menu_button" th:href="survey.html">Login</a></li>
+                <li><a th:if="!${#request.userPrincipal}" class="menu_button" th:href="@{/login}">Login</a>
+                </li>
+                <li><a sec:authorize="isAuthenticated()" class="menu_button" th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -37,7 +43,8 @@
     <hr>
 
     <a th:href="@{/bookgui}"
-       class="add_button">
+       class="add_button"
+       sec:authorize="hasRole('ROLE_ADMIN')">
         Add Book
     </a>
 
@@ -61,15 +68,27 @@
             <div>
 
                 <td>
-                    <a th:href="@{/updatebook(bookId=${tempBook.id})}"
-                       class="update_button">
-                        Update
-                    </a>
-                    <a th:href="@{/deletebook(bookId=${tempBook.id})}"
-                       class="delete_button"
-                       onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false ">
-                        Delete
-                    </a>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/updatebook(bookId=${tempBook.id})}"
+                           class="update_button">
+                            Update
+                        </a>
+                    </div>
+
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/deletebook(bookId=${tempBook.id})}"
+                           class="delete_button"
+                           onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false ">
+                            Delete
+                        </a>
+                    </div>
+
+                    <div sec:authorize="hasRole('ROLE_USER')">
+                        <a th:href="@{/updatebook(bookId=${tempBook.id})}"
+                           class="update_button">
+                            Borrow
+                        </a>
+                    </div>
                 </td>
             </div>
 

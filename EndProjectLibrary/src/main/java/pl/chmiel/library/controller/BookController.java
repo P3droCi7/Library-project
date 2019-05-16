@@ -27,7 +27,7 @@ public class BookController {
 
     @GetMapping("/bookprofile")
     private String bookProfile(@RequestParam("bookId") Integer theId) {
-        bookRepo.findById(theId).get();
+        bookRepo.findById(theId).orElseThrow(null);
         return "bookprofile";
     }
 

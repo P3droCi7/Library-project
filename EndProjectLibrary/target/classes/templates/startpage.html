@@ -1,7 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
 <head>
 
     <meta charset="utf-8">
@@ -16,13 +16,16 @@
 
 <header>
     <h1>Library Start page</h1>
+    <p class="login_info"> Logged in as: <span sec:authentication="name"></span></p>
     <nav>
         <div>
             <ul>
                 <li><a class="menu_button" th:href="@{/startpage}">Home</a></li>
                 <li><a class="menu_button" th:href="@{/showallbooks}">Book list</a></li>
                 <li><a class="menu_button" th:href="@{/adduser}">User Panel</a></li>
-                <li><a class="menu_button" th:href="survey.html">Login</a></li>
+                <li><a th:if="!${#request.userPrincipal}" class="menu_button" th:href="@{/login}">Login</a>
+                </li>
+                <li><a sec:authorize="isAuthenticated()" class="menu_button" th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>
     </nav>
