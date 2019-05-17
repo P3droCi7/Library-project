@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.chmiel.library.component.User;
+import pl.chmiel.library.repository.BookRepo;
 import pl.chmiel.library.repository.UserRepo;
 
 @Controller
@@ -16,6 +17,9 @@ public class UserController {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    BookRepo bookRepo;
 
     @GetMapping("/usergui")
     public String showGui(Model model) {
@@ -34,9 +38,5 @@ public class UserController {
         return "showusers";
     }
 
-//    @GetMapping("/showallusers")
-//    public String listUsers(Model model) {
-//      model.addAttribute("users", userRepo.findAll());
-//        return "showusers";
-//    }
+
 }

@@ -26,8 +26,8 @@ public class BookController {
     }
 
     @GetMapping("/bookprofile")
-    private String bookProfile(@RequestParam("bookId") Integer theId) {
-        bookRepo.findById(theId).orElseThrow(null);
+    private String bookProfile(@RequestParam Model model, Integer id) {
+        model.addAttribute("books", bookRepo.findById(id));
         return "bookprofile";
     }
 
@@ -61,5 +61,4 @@ public class BookController {
         bookRepo.deleteById(theId);
         return "redirect:/showallbooks";
     }
-
 }

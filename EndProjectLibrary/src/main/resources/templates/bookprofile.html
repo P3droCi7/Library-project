@@ -15,14 +15,19 @@
 </head>
 
 <header>
-    <h1>Book list</h1>
+    <h1>Library start page</h1>
+    <p class="login_info"> Logged in as: <span sec:authentication="name"></span>
+        <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+    </p>
     <nav>
         <div>
             <ul>
                 <li><a class="menu_button" th:href="@{/startpage}">Home</a></li>
                 <li><a class="menu_button" th:href="@{/showallbooks}">Book list</a></li>
-                <li><a class="menu_button" th:href="@{/adduser}">User Panel</a></li>
-                <li><a class="menu_button" th:href="@{/login}">Login</a></li>
+                <li><a class="menu_button" th:href="@{/usergui}">User Panel</a></li>
+                <li><a th:if="!${#request.userPrincipal}" class="menu_button" th:href="@{/login}">Login</a>
+                </li>
+                <li><a sec:authorize="isAuthenticated()" class="menu_button" th:href="@{/logout}">Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -34,32 +39,27 @@
     <h3>Book profile</h3>
     <hr>
 
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
-        </tr>
-        </thead>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+            </tr>
+            </thead>
 
-        <tbody>
+            <tbody>
 
-        <tr th:each="tempBook : ${book}">
-            <td type="hidden" th:field="*{id}">
+            <tr th:each="tempBook : ${books}">
 
-            <td th:text="${tempBook.getTitle()}"/>
-            <td th:text="${tempBook.getAuthor()}"/>
-            <td th:text="${tempBook.getYear()}"/>
+                <td th:text="${tempBook.getTitle()}"/>
+                <td th:text="${tempBook.getAuthor()}"/>
+                <td th:text="${tempBook.getYear()}"/>
 
-        </tr>
-        </tbody>
+            </tr>
+            </tbody>
 
-    </table>
-    <!--    <p th:type="hidden" th:field="*{id}">-->
-    <!--    <p th:text="${bookId.getTitle()}"/>-->
-    <!--    <p th:text="${bookId.getAuthor()}"/>-->
-    <!--    <p th:text="${bookId.getYear()}"/>-->
+        </table>
 
     <div class="container">
         <h3>Description</h3>
@@ -73,21 +73,5 @@
     <a th:href="@{/showallbooks}">Back to Book List</a>
 </div>
 
-
-<footer>
-    <div class="container">
-
-        <hr>
-
-        <nav>
-            <ul>
-                <li><a th:href="@{/startpage}">Home</a></li>
-                <li><a th:href="@{/showallbooks}">Book list</a></li>
-                <li><a th:href="@{/adduser}">User Panel</a></li>
-                <li><a th:href="survey.html">Login</a></li>
-            </ul>
-        </nav>
-    </div>
-</footer>
 </body>
 </html>

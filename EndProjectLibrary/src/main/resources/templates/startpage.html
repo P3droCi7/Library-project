@@ -15,15 +15,17 @@
 </head>
 
 <header>
-    <h1>Library Start page</h1>
-    <p class="login_info"> Logged in as: <span sec:authentication="name"></span></p>
+    <h1>Library start page</h1>
+    <p class="login_info"> Logged in as: <span sec:authentication="name"></span>
+<!--        <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
+    </p>
     <nav>
         <div>
             <ul>
                 <li><a class="menu_button" th:href="@{/startpage}">Home</a></li>
                 <li><a class="menu_button" th:href="@{/showallbooks}">Book list</a></li>
-                <li><a class="menu_button" th:href="@{/adduser}">User Panel</a></li>
-                <li><a th:if="!${#request.userPrincipal}" class="menu_button" th:href="@{/login}">Login</a>
+                <li><a class="menu_button" th:href="@{/usergui}">User Panel</a></li>
+                <li><a th:if="!${#request.userPrincipal}" class="menu_button" th:href="@{/showallbooks}">Login</a>
                 </li>
                 <li><a sec:authorize="isAuthenticated()" class="menu_button" th:href="@{/logout}">Logout</a></li>
             </ul>
@@ -44,20 +46,5 @@
     </p>
 </div>
 
-<footer>
-    <div class="container">
-
-        <hr>
-
-        <nav>
-            <ul>
-                <li><a th:href="@{/startpage}">Home</a></li>
-                <li><a th:href="@{/showallbooks}">Book list</a></li>
-                <li><a th:href="@{/adduser}">User Panel</a></li>
-                <li><a th:href="survey.html">Login</a></li>
-            </ul>
-        </nav>
-    </div>
-</footer>
 </body>
 </html>

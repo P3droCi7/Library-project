@@ -27,7 +27,7 @@
             <ul>
                 <li><a class="menu_button" th:href="@{/startpage}">Home</a></li>
                 <li><a class="menu_button" th:href="@{/showallbooks}">Book list</a></li>
-                <li><a class="menu_button" th:href="@{/adduser}">User Panel</a></li>
+                <li><a class="menu_button" th:href="@{/usergui}">User Panel</a></li>
                 <li><a th:if="!${#request.userPrincipal}" class="menu_button" th:href="@{/login}">Login</a>
                 </li>
                 <li><a sec:authorize="isAuthenticated()" class="menu_button" th:href="@{/logout}">Logout</a></li>
@@ -42,12 +42,21 @@
     <h3>Book list!</h3>
     <hr>
 
-    <a th:href="@{/bookgui}"
-       class="add_button"
-       sec:authorize="hasRole('ROLE_ADMIN')">
-        Add Book
-    </a>
-
+    <div style="display: inline-block;">
+        <a th:href="@{/bookgui}"
+           class="add_button"
+           sec:authorize="hasRole('ROLE_ADMIN')">
+            Add Book
+        </a>
+    </div>
+    <div class="search_bar">
+        <form th:action="@{/findbytitleorauthor}" th:object="${books}" method="get"> Search for book:
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<div class="container">
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
@@ -98,22 +107,6 @@
     </table>
 
 </div>
-
-
-<footer>
-    <div class="container">
-        <hr>
-
-        <nav>
-            <ul>
-                <li><a th:href="@{/startpage}">Home</a></li>
-                <li><a th:href="@{/showallbooks}">Book list</a></li>
-                <li><a th:href="@{/adduser}">User Panel</a></li>
-                <li><a th:href="survey.html">Login</a></li>
-            </ul>
-        </nav>
-    </div>
-</footer>
 
 </body>
 </html>
