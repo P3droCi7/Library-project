@@ -1,6 +1,7 @@
 package pl.chmiel.library.component;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -8,13 +9,14 @@ public class Book {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
   private String title;
   private String author;
   private int year;
 
-  @ManyToMany(mappedBy = "bookSet")
-  Set<User> userSet;
+  @ManyToMany(fetch = FetchType.LAZY,
+          mappedBy = "bookSet")
+  private Set<User> userSet = new HashSet<>();
 
   public Book() {
   }
@@ -25,8 +27,12 @@ public class Book {
     this.year = year;
   }
 
-  public int getId() {
+  public Long getId() {
     return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getTitle() {

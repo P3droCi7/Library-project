@@ -25,10 +25,22 @@ public class BookController {
         return "bookgui";
     }
 
+    @GetMapping("/bookprofile")
+    private String bookProfile(@RequestParam Model model, Long id) {
+        model.addAttribute("books", bookRepo.findById(id));
+        return "bookprofile";
+    }
+
     @GetMapping("/showallbooks")
     private String showAllBooks(Model model) {
-        Iterable<Book> allBooks = bookRepo.findAll();
-        model.addAttribute("books", allBooks);
+//        Iterable<Book> allBooks = bookRepo.findAll();
+        model.addAttribute("books", bookRepo.findAll());
+        return "showbooks";
+    }
+
+    @GetMapping("/findbytitleorauthor")
+    private String findByTitleOrAuthor(@RequestParam("books") Model model, String str) {
+        model.addAttribute("books", bookRepo.findByTitleOrAuthor(str));
         return "showbooks";
     }
 
@@ -39,14 +51,14 @@ public class BookController {
     }
 
     @GetMapping("/updatebook")
-    private String updateBook(@RequestParam("bookId") int theId, Model model) {
+    private String updateBook(@RequestParam("bookId") Long theId, Model model) {
         Optional<Book> theBook = bookRepo.findById(theId);
         model.addAttribute("book", theBook);
         return "redirect:/bookgui";
     }
 
     @GetMapping("/deletebook")
-    private String deleteBook(@RequestParam("bookId") int theId) {
+    private String deleteBook(@RequestParam("bookId") Long theId) {
         bookRepo.deleteById(theId);
         return "redirect:/showallbooks";
     }

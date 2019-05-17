@@ -35,7 +35,45 @@
 
 </header>
 
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <h3>Enter user details</h3>-->
 
+<!--    <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">-->
+
+<!--        <table class="table table-bordered table-striped">-->
+<!--            <thead class="thead-dark">-->
+<!--            <tr>-->
+<!--                <th>User ID</th>-->
+<!--                <th>User name</th>-->
+<!--                <th>Password</th>-->
+<!--                <th>Email</th>-->
+<!--                <th>Enabled</th>-->
+<!--                <th>Role</th>-->
+
+<!--            </tr>-->
+<!--            </thead>-->
+
+<!--            <tbody>-->
+
+<!--            <td>User ID: <input type="text" th:field="*{userId}"></td>-->
+<!--            <td>User name: <input type="text" th:field="*{userName}"></td>-->
+<!--            <td>Password: <input type="text" th:field="*{password}"></td>-->
+<!--            <td>Email: <input type="text" th:field="*{email}"></td>-->
+<!--            <td>Enabled: <input type="text" th:field="*{enabled}"></td>-->
+<!--            <td>Role: <input type="text" th:field="*{role}"></td>-->
+
+
+<!--            </tbody>-->
+
+<!--            <p><input type="submit" value="Add user!"></p>-->
+
+<!--        </table>-->
+
+<!--    </form>-->
+
+<!--</div>-->
+<!--</body>-->
 <body>
 <div class="container">
     <h3>Enter user details</h3>
@@ -56,14 +94,6 @@
 
     <hr>
     <a th:href="@{/startpage}">Back to Home panel</a>
-
-    <div style="display: inline-block;">
-        <a th:href="@{/showallusers}"
-           class="add_button"
-           sec:authorize="hasRole('ROLE_ADMIN')">
-            Show all users
-        </a>
-    </div>
 
 </div>
 

@@ -39,6 +39,7 @@ public class UserController {
         return showAllUsers(model);
     }
 
+    @GetMapping("/showallusers")
     private String showAllUsers(Model model) {
         model.addAttribute("users", userRepo.findAll());
         return "showusers";
@@ -48,16 +49,16 @@ public class UserController {
     public String borrowBook(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
-        if(name != "anonymousUser"){
+
+        Long bookIdInDB = Long.valueOf(3);
+
+        if(name != "anonymousUser" && name != "null"){
+            Book bookInDB = bookRepo.findById(bookIdInDB).get();
+            User userInDB = userRepo.findByUserName(name);
+            userInDB.getBookSet().add(bookInDB);
+            userRepo.save(userInDB);
           //  userRepo.findByUserName(name).setBookSet(bookRepo.findById(1));
         }
         return "Success";
     }
-
-
-//    @GetMapping("/showallusers")
-//    public String listUsers(Model model) {
-//      model.addAttribute("users", userRepo.findAll());
-//        return "showusers";
-//    }
 }

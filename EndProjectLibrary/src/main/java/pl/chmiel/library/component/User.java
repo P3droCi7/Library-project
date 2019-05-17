@@ -6,9 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -17,21 +15,20 @@ public class User implements Serializable, UserDetails {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long userId;
   private String userName;
   private String password;
   private String email;
   private boolean enabled;
   private String role;
-  //  @OneToMany(mappedBy = "id", fetch = FetchType.EAGER)
-//  private List<Book> bookList;
-  @ManyToMany
+
+  @ManyToMany(cascade = { CascadeType.ALL })
   @JoinTable(
           name = "book_list",
           joinColumns = @JoinColumn(name = "userId"),
           inverseJoinColumns = @JoinColumn(name = "id"))
-  Set<Book> bookSet;
+  private Set<Book> bookSet = new HashSet<>();
 
   public User() {
   }
