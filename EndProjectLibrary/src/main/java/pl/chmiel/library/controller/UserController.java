@@ -31,6 +31,12 @@ public class UserController {
         return "usergui";
     }
 
+    @GetMapping("/adduser")
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
+        return "adduser";
+    }
+
     @PostMapping("/adduser")
     public String addUser(@ModelAttribute User user, Model model) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -60,20 +66,26 @@ public class UserController {
         }
         return "redirect:/showallbooks";
     }
-//      @GetMapping("/borrowbook")
-//    public String borrowBook(Model model) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        String name = auth.getName(); //get logged in username
-//
-//        Long bookIdInDB = Long.valueOf(3);
-//
-//        if(name != "anonymousUser" && name != "null"){
-//            Book bookInDB = bookRepo.findById(bookIdInDB).get();
-//            User userInDB = userRepo.findByUserName(name);
-//            userInDB.getBookSet().add(bookInDB);
-//            userRepo.save(userInDB);
-//          //  userRepo.findByUserName(name).setBookSet(bookRepo.findById(1));
-//        }
-//        return "Success";
-//    }
+    @GetMapping("/returnbook")
+    public String returnBook(@RequestParam("bookId") Long theId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+
+        if (name != "anonymousUser" && name != "null") {
+            Book bookInDB = bookRepo.findById(theId).get();
+            User userInDB = userRepo.findByUserName(name);
+            userInDB.getBookSet().remove(bookInDB);
+            userRepo.save(userInDB);
+            //  userRepo.findByUserName(name).setBookSet(bookRepo.findById(1));
+        }
+        return "redirect:/showuserbooks";
+    }
+    @GetMapping("/showuserbooks")
+    private String showuserbooks(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+
+        model.addAttribute("userbooks", userRepo.findByUserName(name).getBookSet());
+        return "showuserbooks";
+    }
 }

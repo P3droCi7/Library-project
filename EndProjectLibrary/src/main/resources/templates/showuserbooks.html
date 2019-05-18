@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml"
       lang="en">
+<!--      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"-->
 <head>
 
     <meta charset="utf-8">
@@ -12,11 +13,12 @@
 
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 
-    <title>User list</title>
+    <title>Book list</title>
+
 </head>
 
 <header>
-    <h1>Library start page</h1>
+    <h1>Book list</h1>
     <p class="login_info"> Logged in as: <span sec:authentication="name"></span>
         <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
     </p>
@@ -34,37 +36,57 @@
     </nav>
 
 </header>
+
 <body>
 <div class="container">
-
-    <h3>User list!</h3>
+    <h3>Your book list</h3>
     <hr>
+
+
+    <div class="search_bar">
+        <form th:action="@{/findbytitleorauthor}" th:object="${books}" method="get"> Search for book:
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<div class="container">
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>User ID</th>
-            <th>User name</th>
-            <th>Password</th>
-            <th>Email</th>
-            <th>Enabled</th>
-            <th>Role</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Action</th>
         </tr>
         </thead>
 
         <tbody>
 
-        <tr th:each="user : ${users}">
-            <td th:text="${user.getUserId()}"/>
-            <td th:text="${user.getUserName()}"/>
-            <td th:text="${user.getPassword()}"/>
-            <td th:text="${user.getEmail()}"/>
-            <td th:text="${user.getEnabled()}"/>
-            <td th:text="${user.getRole()}"/>
+        <tr th:each="tempBook : ${userbooks}">
+            <td><a th:href="@{/bookprofile(bookId=${tempBook.id})}" th:text="${tempBook.getTitle()}"/></td>
+            <td th:text="${tempBook.getAuthor()}"/>
+            <td th:text="${tempBook.getYear()}"/>
+
+            <div>
+
+                <td>
+
+                    <div sec:authorize="hasRole('ROLE_USER')">
+                        <a th:href="@{/returnbook(bookId=${tempBook.id})}"
+                           class="delete_button">
+                            Return
+                        </a>
+                    </div>
+                </td>
+            </div>
 
         </tr>
         </tbody>
 
     </table>
+
 </div>
+
 </body>
 </html>

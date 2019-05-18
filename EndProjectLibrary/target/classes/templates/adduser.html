@@ -12,11 +12,11 @@
 
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 
-    <title>User list</title>
+    <title>Document</title>
 </head>
 
 <header>
-    <h1>Library start page</h1>
+    <h1>User list</h1>
     <p class="login_info"> Logged in as: <span sec:authentication="name"></span>
         <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
     </p>
@@ -34,37 +34,33 @@
     </nav>
 
 </header>
+
 <body>
 <div class="container">
-
-    <h3>User list!</h3>
+    <h3>Add user</h3>
     <hr>
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th>User ID</th>
-            <th>User name</th>
-            <th>Password</th>
-            <th>Email</th>
-            <th>Enabled</th>
-            <th>Role</th>
-        </tr>
-        </thead>
 
-        <tbody>
-
-        <tr th:each="user : ${users}">
-            <td th:text="${user.getUserId()}"/>
-            <td th:text="${user.getUserName()}"/>
-            <td th:text="${user.getPassword()}"/>
-            <td th:text="${user.getEmail()}"/>
-            <td th:text="${user.getEnabled()}"/>
-            <td th:text="${user.getRole()}"/>
-
-        </tr>
-        </tbody>
-
-    </table>
 </div>
+
+<div>
+    <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
+
+        <input type="text" th:field="*{userId}" class="form-control mb-4 col-4" placeholder="UserId">
+        <input type="text" th:field="*{userName}" class="form-control mb-4 col-4" placeholder="UserName">
+        <input type="text" th:field="*{password}" class="form-control mb-4 col-4" placeholder="Password">
+        <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
+        <input type="text" th:field="*{enabled}" class="form-control mb-4 col-4" value="true">
+        <input type="text" th:field="*{role}" class="form-control mb-4 col-4" value="USER">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+</div>
+
+<div>
+    <hr>
+    <a th:href="@{/startpage}">Back to Home panel</a>
+
+</div>
+<hr>
 </body>
+
 </html>
