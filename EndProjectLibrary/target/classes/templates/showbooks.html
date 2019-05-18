@@ -93,7 +93,8 @@
                     </div>
 
                     <div sec:authorize="hasRole('ROLE_USER')">
-                        <a th:href="@{/updatebook(bookId=${tempBook.id})}"
+<!--                        <a th:action="@{/borrowbook}" th:object="${book}" method="post" type="submit" class="update_button">-->
+                        <a th:href="@{/borrowbook(bookId=${tempBook.id})}"
                            class="update_button">
                             Borrow
                         </a>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.chmiel.library.component.Book;
 import pl.chmiel.library.component.User;
 import pl.chmiel.library.repository.BookRepo;
@@ -46,19 +47,33 @@ public class UserController {
     }
 
     @GetMapping("/borrowbook")
-    public String borrowBook(Model model) {
+    public String borrowBook(@RequestParam("bookId") Long theId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
 
-        Long bookIdInDB = Long.valueOf(3);
-
-        if(name != "anonymousUser" && name != "null"){
-            Book bookInDB = bookRepo.findById(bookIdInDB).get();
+        if (name != "anonymousUser" && name != "null") {
+            Book bookInDB = bookRepo.findById(theId).get();
             User userInDB = userRepo.findByUserName(name);
             userInDB.getBookSet().add(bookInDB);
             userRepo.save(userInDB);
-          //  userRepo.findByUserName(name).setBookSet(bookRepo.findById(1));
+            //  userRepo.findByUserName(name).setBookSet(bookRepo.findById(1));
         }
-        return "Success";
+        return "redirect:/showallbooks";
     }
+//      @GetMapping("/borrowbook")
+//    public String borrowBook(Model model) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        String name = auth.getName(); //get logged in username
+//
+//        Long bookIdInDB = Long.valueOf(3);
+//
+//        if(name != "anonymousUser" && name != "null"){
+//            Book bookInDB = bookRepo.findById(bookIdInDB).get();
+//            User userInDB = userRepo.findByUserName(name);
+//            userInDB.getBookSet().add(bookInDB);
+//            userRepo.save(userInDB);
+//          //  userRepo.findByUserName(name).setBookSet(bookRepo.findById(1));
+//        }
+//        return "Success";
+//    }
 }
